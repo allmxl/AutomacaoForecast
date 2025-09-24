@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processamento Concluído</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            margin: 1em;
+            background-color: #f0f2f5;
+            text-align: center; /* Centraliza todo o texto do body */
+        }
+        
+        h2 { 
+            text-align: center; 
+        }
+        
+        .container { 
+            max-width: 700px; 
+            margin: auto; 
+            padding: 2em;
+            border: 1px solid #ddd;
+            border-radius: 10px; 
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Estilos para mensagem de sucesso e erro */
+        .success { 
+            color: #28a745; /* Verde sucesso */
+            font-size: 1.5em; /* Fonte maior para destaque */
+        }
+        .error { 
+            color: #dc3545; /* Vermelho erro */
+            font-size: 1.5em; /* Fonte maior para destaque */
+        }
+
+        p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 30px; /* Espaço antes do botão */
+        }
+
+        /* Estilo do botão de download (padrão do index, mas verde) */
+        .download-link {
+            display: inline-block;
+            width: 100%;
+            max-width: 400px; /* Limita a largura máxima em telas grandes */
+            padding: 12px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            text-decoration: none;
+            
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #00285a; /* Cor de sucesso */
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .download-link:hover {
+            background-color: #00285a; /* Verde mais escuro no hover */
+        }
+
+        /* Media query para telas pequenas (celulares) */
+        @media (max-width: 600px) {
+            body { 
+                margin: 0; 
+                background-color: #ffffff;
+            }
+            .container {
+                padding: 1.5em;
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            h2 { 
+                font-size: 1.3em; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='Hertz_Logo_Positivo_RGB_page-0001.jpg') }}" alt="Logo da Aplicação" style="display: block; margin: 0 auto 30px; width: 150px;">
+
+        {% if erro %}
+            <h2 class="error">Ocorreu um Erro!</h2>
+            <p>{{ erro }}</p>
+        {% else %}
+            <h2 class="success">Processamento Concluído!</h2>
+            <p>O seu banco de dados foi atualizado com sucesso.</p>
+            <a href="/download/{{ nome_arquivo }}" class="download-link">BAIXAR BANCO DE DADOS</a>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Automação de Banco Forecast</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            margin: 1em; /* Adicionado um pouco de margem ao corpo */
+            background-color: #f0f2f5; /* Um fundo suave para contraste */
+        }
+        
+        h2 { 
+            text-align: center; 
+        }
+        
+        .container { 
+            max-width: 700px; 
+            margin: auto; 
+            padding: 2em; /* Reduzido o padding para melhor visualização */
+            border: 1px solid #ddd; /* Borda mais sutil */
+            border-radius: 10px; 
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Adicionada uma sombra suave */
+        }
+        
+        form {
+            font-size: 16px; /* Ajustado para um tamanho mais padrão */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Alinhado à esquerda para melhor leitura */
+            gap: 15px; /* Aumentado o espaçamento */
+        }
+
+        input, button {
+            padding: 12px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            width: 100%; /* Garante que os inputs ocupem toda a largura */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #00285a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        button:hover {
+            background-color: #00418c;
+        }
+        
+        label {
+            font-weight: bold;
+        }
+
+        /* ADIÇÃO 2: Media query para telas com largura máxima de 600px (celulares) */
+        @media (max-width: 600px) {
+            body { 
+                margin: 0; 
+                background-color: #ffffff; /* Fundo branco em telas pequenas */
+            }
+            .container {
+                padding: 1.5em; /* Padding menor em telas pequenas */
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            h2 { 
+                font-size: 1.3em; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='Hertz_Logo_Positivo_RGB_page-0001.jpg') }}" alt="Logo da Aplicação" style="display: block; margin: 0 auto 20px; width: 150px;">
+        
+        <h2>Upload de Arquivos para Processamento</h2>
+        
+        <form action="/processar" method="post" enctype="multipart/form-data">
+            <label for="dre">Arquivo DRE (Obrigatório):</label>
+            <input type="file" name="dre" required>
+            
+            <label for="irrestrito">Arquivo Forecast Irrestrito (Opcional):</label>
+            <input type="file" name="irrestrito">
+            
+            <label for="restrito">Arquivo Forecast Restrito (Opcional):</label>
+            <input type="file" name="restrito">
+            
+            <button type="submit">PROCESSAR ARQUIVOS</button>
+        </form>
+    </div>
+</body>
+</html>
