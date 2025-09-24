@@ -49,12 +49,3 @@ linha 4                                                                         
 linha 5 Anti-mais | 5008 | Anti-Septico | Anti | Dermatológico |    |  Portfólio         146                   160                         900                290
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Leitura de DRE deu certo-- formatação realizada! 
-
-Problema atual: Puxa todos os meses e anos do realizado e preciso que seja puxado que mês e ano especificos que estou rodando o sistema. 
-
-Para segunda>> Ajuste de meses do realizado, ajuste de todo o forecast 
-
-Segunda: Ajustado problema do DRE com o mês e ano especifico 
-Problema Atual: Códigos que contém letras estão vindo zerados e as colunas de soma de qtd e soma de valor estão vindo zerados 
