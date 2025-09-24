@@ -86,7 +86,7 @@ def processar_dre_realizado(caminho_dre):
 def processar_planilha_forecast(caminho_arquivo, tipo_base, mapa_fornecimento):
     print(f"3. Processando Forecast: {os.path.basename(caminho_arquivo)}...")
     try:
-        df = pd.read_excel(caminho_arquivo, header=[2, 3], skipfooter=1)
+        df = pd.read_excel(caminho_arquivo, header=[2, 3])
         
         # 1. Limpeza de Cabeçalho
         novas_colunas = []
@@ -256,4 +256,5 @@ def executar_processamento(caminho_dre, caminho_irrestrito=None, caminho_restrit
         
         return nome_arquivo_saida, None # Retorna o nome do arquivo para o link de download
     except Exception as e:
+
         return None, f"Ocorreu um erro geral no processamento: {str(e)}"
