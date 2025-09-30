@@ -1,51 +1,66 @@
 # AutomacaoForecast
 Projeto de automação para formatação de planilhas
 
-## Objetivo
-Automatizar a atualização da planilha BD a partir de arquivos Excel recebidos mensalmente (restritos e irrestritos), adicionando novas colunas.
+# Ferramenta de Automação de Relatórios Financeiros
 
-## Estrutura do Projeto
-- `input/` → arquivos Excel recebidos
-- `output/` → arquivos processados (opcional)
-- `scripts/` → scripts Python
-- `BD.xlsx` → planilha principal
+![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)
 
-## Como usar
-1. Coloque os arquivos Excel na pasta `input/`.
-2. Execute o script `scripts/automatizacao_bd.py`.
-3. A planilha `BD.xlsx` será atualizada com os dados processados.
+Uma aplicação web desenvolvida em Python para automatizar a consolidação e o processamento de relatórios, transformando um fluxo de trabalho manual e demorado em um processo de poucos cliques.
 
-Estrutura final: quais serão as colunas definitivas (exatamente nessa ordem)?
-Base | Ciclo | Classificação | Ano | Mês | Código | Descrição | Produto | Marca | Fornecimento | Categoria | Soma de Qtd | Soma de Valor
-Estrutura inicial: nesta ordem:Tabela dinâmica 
-(iniciado na linha 4) 
-Material | Código | Marca | Submarca  | CategoriaMkt | Lançamento | Classificação 
-(iniciado na linha 3) 
-Prev.Vendas(Qtde) | Prev.vendas (R$)
-(iniciado na linha 4)
-Set.2025 | out.2025 | nov.2025 | dez.2025 | 2025 | ...próximos 12 meses (A coluna N de total 2025 deve ser ignorada) 
+## 📜 Sobre o Projeto
+
+Este projeto foi criado para resolver um desafio comum em departamentos financeiros: a necessidade de consolidar dados de múltiplas fontes (planilhas Excel) em um único relatório mestre. O processo manual era repetitivo, propenso a erros e consumia um tempo valioso que poderia ser usado para análises mais estratégicas.
+
+A solução é uma aplicação web interna que oferece uma interface simples para que usuários não-técnicos possam fazer o upload dos arquivos brutos e receber, em segundos, o relatório final consolidado e formatado.
+
+## ✨ Funcionalidades
+
+* **Interface Web Amigável:** Permite o uso da ferramenta sem necessidade de conhecimento técnico.
+* **Upload de Múltiplos Arquivos:** Suporte para o envio simultâneo dos arquivos de entrada (DRE, Forecasts, etc.).
+* **Processamento Automatizado:** Toda a lógica de negócio, incluindo limpeza, transformação, cálculos e consolidação dos dados, é executada automaticamente no backend com a biblioteca Pandas.
+* **Geração de Relatório Final:** Cria um arquivo Excel (`.xlsx`) consolidado e pronto para análise.
+* **Download Direto:** O usuário pode baixar o resultado diretamente pela interface ao final do processo.
+
+## 🛠️ Tecnologias Utilizadas
+
+O projeto foi construído utilizando as seguintes tecnologias:
+
+* **Backend:**
+    * [Python](https://www.python.org/)
+    * [Flask](https://flask.palletsprojects.com/): Micro-framework para a criação do servidor web.
+    * [Pandas](https://pandas.pydata.org/): Biblioteca para manipulação e análise dos dados.
+    * [Openpyxl](https://openpyxl.readthedocs.io/): Dependência do Pandas para manipulação de arquivos `.xlsx`.
+* **Frontend:**
+    * HTML5
+    * CSS3
+
+## 📁 Estrutura de Pastas
+
+O repositório está organizado da seguinte forma para garantir a separação de responsabilidades:
+
+```
+/Automacao_Web/
+|
+|-- app.py                # Servidor web (Backend Flask)
+|-- processador.py        # Módulo com toda a lógica de processamento de dados
+|-- requirements.txt      # Lista de dependências do Python
+|
+|-- /templates/           # Arquivos HTML da interface
+|   |-- index.html
+|   |-- sucesso.html
+|
+|-- /uploads/             # Pasta temporária para os arquivos enviados
+|-- /output/              # Pasta onde o relatório final é salvo
+|-- /arquivados_forecast/ # Pasta para arquivar os arquivos já processados
+|
+`-- README.md             # Documentação do projeto
+```
 
 
-Origem dos dados:
-Orçamento → já está no BD, não mexemos.
-Fornecedimento → vem do DRE. 
-Realizado → vem do DRE.
-Forecast Restrito/Irrestrito → vem dos arquivos da pasta ForecastAutomacao 
+## 📖 Como Usar
 
-A linha 3 deve concatenar com a linha 4 para formar o OBJETIVO|MÊS (Prev.Vendas(Qtde) Set.2025) -- Vai ser os dados desta coluna que será o novo Soma de Qtd 
-Nestas planilhas tem do mês atual até o próximo ano (deve ser lido tudo) 
-
-Período: 
-exemplo -- 
-NO BD 
-
-Forecast Abril Irrestrito | Ciclo 3 Irrestrito (Abril) | Irrestrito | 2025 | abr | 5008 | Anti-mais | 5008\Anti-mais | Anti-Septico | Prod.Interno | Dermatológico | 146 | 190
-Forecast Abril Irrestrito | Ciclo 3 Irrestrito (Abril) | Irrestrito | 2025 | mai | 5008 | Anti-mais | 5008\Anti-mais | Anti-Septico | Prod.Interno | Dermatológico | 160 | 290
-Forecast Abril Irrestrito | Ciclo 3 Irrestrito (Abril) | Irrestrito | 2025 | jun | 5008 | Anti-mais | 5008\Anti-mais | Anti-Septico | Prod.Interno | Dermatológico | 500 | 900
-
-NA PLANILHA com tabela dinâmica
-linha 3                                                                             Prev.vendas (Qtde)  | Prev.vendas (Qtde) ....   Prev.vendas (R$) |   Prev.vendas (R$)
-linha 4                                                                                    Set.2025     |     Out.2025       ....      Set.2025      |      Out.2025
-linha 5 Anti-mais | 5008 | Anti-Septico | Anti | Dermatológico |    |  Portfólio         146                   160                         900                290
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+1.  Acesse a aplicação pelo navegador.
+2.  Clique nos botões "Escolher arquivo" para selecionar os arquivos DRE e Forecast (Irrestrito e Restrito) do seu computador.
+3.  Clique no botão **"Processar Arquivos"**.
+4.  Aguarde o processamento. Você será redirecionado para uma página de sucesso.
+5.  Clique no botão **"Baixar Banco
